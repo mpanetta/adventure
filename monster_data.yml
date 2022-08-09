@@ -1,0 +1,19 @@
+monsters:
+  orc:
+    name: Orc
+    hit_points: 15
+    attack_power: 8
+    defense_power: 2
+    experience_value: 100
+  goblin:
+    name: Goblin
+    hit_points: 10
+    attack_power: 4
+    defense_power: 1
+    experience_value: 50
+  bugbear:
+    name: Bugbear
+    hit_points: 25
+    attack_power: 10
+    defense_power: 2
+    experience_value: 140
