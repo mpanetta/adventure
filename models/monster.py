@@ -21,7 +21,7 @@ class _MonsterFactory(object):
     # private methods
 
     def _load_monsters(self):
-        with open("monster_data.yml", "r") as stream:
+        with open("data/monster_data.yml", "r") as stream:
             try:
                 self._monsters = yaml.safe_load(stream)
             except yaml.YAMLError as exception:
