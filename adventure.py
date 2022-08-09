@@ -1,18 +1,18 @@
 #!python3
 
-from command_parser import CommandParser
-from monster import MonsterFactory
-from dungeon import Dungeon
-from player import Player
-from display import Display
-from display import display_decorator
+from models.command_parser import CommandParser
+from models.monster import MonsterFactory
+from models.dungeon import Dungeon
+from models.player import Player
+from models.display import Display
+from models.display import display_decorator
 
 import time
 
 @display_decorator
 def main(display):
     command_parser = CommandParser()
-    dungeon = Dungeon("dungeons/level1.dng")
+    dungeon = Dungeon("data/dungeons/level1.dng")
     dungeon_window = display.create_window(5, 5, 20, 20)
     player = Player(3, 5, "*")
 
