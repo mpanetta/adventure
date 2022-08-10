@@ -64,7 +64,7 @@ class _Display(object):
         new_window.leaveok(True)
 
         self._windows.append(new_window)
-        if(kwargs.get("border") == True): new_window.border("%", "%", "%", "%", "%", "%")
+        if(kwargs.get("border") == True): new_window.border("#", "#", "#", "#", "#", "#", "#", "#")
 
         return new_window
 
