@@ -53,18 +53,25 @@ class _Display(object):
         self._stdscr.keypad(False)
         curses.noecho()
         curses.endwin()
+        curses.setsyx(-1, -1)
+        curses.curs_set(1)
 
     def clear(self):
         self._stdscr.clear()
 
-    def create_window(self, row, col, height, width):
+    def create_window(self, row, col, height, width, **kwargs):
         new_window = curses.newwin(height, width, row, col)    
+        new_window.leaveok(True)
+
         self._windows.append(new_window)
+        if(kwargs.get("border") == True): new_window.border("%", "%", "%", "%", "%", "%")
 
         return new_window
 
     def create_pad(self, s_row, s_col, h, w, view_h, view_w):
         pad = curses.newpad(h, w)
+        pad.leaveok(True)
+
         metadata = {
                 "s_row": s_row,
                 "s_col": s_col,
@@ -121,6 +128,7 @@ class _Display(object):
 
             curses.noecho()
             curses.cbreak()
+            curses.curs_set(0)
 
         self._windows = list([stdscr])
         self._pads = list([])
