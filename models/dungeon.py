@@ -20,10 +20,11 @@ class Dungeon:
     def draw(self, display, window=None):
         for column in range(0, self._num_columns):
             for row in range(0, self._num_rows):
-                glyph = GLYPHS[self._map[column][row]]
+                glyph = GLYPHS[self._map[row][column]]
+                # if(row == 2): glyph = ord("*")
+                # if(column == 13): glyph = ord("*")
                 obj = self._get_object(column, row)
                 character = (chr(glyph) if obj == None else obj.symbol)
-
                 display.show_text(column, row, character, window=window)
 
     def add_object(self, obj):
@@ -50,8 +51,8 @@ class Dungeon:
                 self._map.append(row)
 
     def _set_dimensions(self):
-        self._num_columns = len(self._map)
-        self._num_rows = len(self._map[0])
+        self._num_rows = len(self._map)
+        self._num_columns = len(self._map[0])
 
     def _get_object(self, column, row):
        for obj in self._objects:

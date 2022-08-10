@@ -11,17 +11,16 @@ import time
 
 @display_decorator
 def main(display):
-    command_parser = CommandParser()
     dungeon = Dungeon("data/dungeons/level1.dng")
-    dungeon_window = display.create_window(5, 5, 20, 20)
+    dungeon_window = display.create_pad(10, 10, 100, 100, 7, 14)
     player = Player(3, 5, "*")
 
     dungeon.add_object(player)
     dungeon.draw(display, dungeon_window)
 
-    display.refresh()
     display.debug_message("hello world")
-    time.sleep(3)
+    display.refresh()
+    display.wait()
 
 if(__name__ == "__main__"):
     main(display=Display)
