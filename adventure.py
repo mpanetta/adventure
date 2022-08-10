@@ -15,22 +15,13 @@ def keyboard_handler(key):
 
 @display_decorator
 def main(display):
-    keyboard_args = { "display": display }
+    player = Player(3, 5, "*")
+    dungeon = Dungeon("data/dungeons/level1.dng")
+    dungeon.add_object(player)
+
     hud = Hud(display, keyboard_handler)
+    hud.set_dungeon(dungeon)
     hud.start_keyboard()
 
-    # hud.wait()
-    # dungeon = Dungeon("data/dungeons/level1.dng")
-    # dungeon_window = display.create_pad(0, 2, 100, 100, 7, 14)
-    # player = Player(3, 5, "*")
-    #
-    # dungeon.add_object(player)
-    # dungeon.draw(display, dungeon_window)
-    #
-    # display.debug_message("hello world")
-    # display.refresh()
-    # display.wait()
-    # display.end()
-    #
 if(__name__ == "__main__"):
     main(display=Display)
