@@ -17,11 +17,18 @@ class _Display(object):
     def show_text(self, col, row, text, window=None):
         if(window == None): window = self._stdscr
 
-        window.addstr(col, row, text)
+        window.addstr(row, col, text)
 
     def refresh(self):
         for window in self._windows:
             window.refresh()
+
+        for pad_data in self._pads:
+            pad = pad_data["pad"]
+            md = pad_data["metadata"]
+            lrc = md["s_col"] + md["view_h"] - 1
+            lrr = md["s_row"] + md["view_w"] - 1
+            pad.refresh(md["p_row"], md["p_col"], md["s_row"], md["s_col"], lrr, lrc)
 
     def end(self, stdscr=None):
         if(stdscr != None):
@@ -35,12 +42,31 @@ class _Display(object):
     def clear(self):
         self._stdscr.clear()
 
-    def create_window(self, col, row, width, height):
+    def wait(self):
+        self._stdscr.getch()
+
+    def create_window(self, row, col, height, width):
         new_window = curses.newwin(height, width, row, col)    
         self._windows.append(new_window)
 
         return new_window
-    
+
+    def create_pad(self, s_col, s_row, w, h, view_w, view_h):
+        pad = curses.newpad(h, w)
+        metadata = {
+                "s_col": s_col,
+                "s_row": s_row,
+                "view_w": view_w,
+                "view_h": view_h,
+                "p_col": 0,
+                "p_row": 0
+        }
+        self._pads.append({ "pad": pad, "metadata": metadata })
+        return pad
+
+    def set_cursor(self, col, row):
+        self._stdscr.move(col, row)
+ 
     def debug_message(self, text):
         window = self._create_debugging_window()
         self.show_text(0, 0, text, window) 
@@ -67,14 +93,16 @@ class _Display(object):
             curses.cbreak()
 
         self._windows = list([stdscr])
+        self._pads = list([])
         self._debugging_window = None
         self.clear()
 
     def _create_debugging_window(self):
         if(self._debugging_window != None): return self._debugging_window
-        width, height = self.columns - 1, 4
-        col, row = 0, self.rows - 1 - height
-        self._debugging_window = self.create_window(col, row, width, height)
+
+        height, width = 4, self.columns - 1
+        row, col = self.rows - height, 0
+        self._debugging_window = self.create_window(row, col, height, width)
 
         return self._debugging_window
 
