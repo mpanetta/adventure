@@ -7,6 +7,7 @@ from models.player import Player
 from models.hud import Hud
 from models.display import Display
 from models.display import display_decorator
+from models.logger import Logger
 
 import time
 
