@@ -15,7 +15,7 @@ def keyboard_handler(key):
 
 @display_decorator
 def main(display):
-    player = Player(3, 5, "*")
+    player = Player(3, 5, "PL")
     dungeon = Dungeon("data/dungeons/level1.dng")
     dungeon.add_object(player)
 
