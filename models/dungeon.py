@@ -1,31 +1,36 @@
-# Dungeon unicode characters
-
-GLYPHS = {
-    "TL": 9484,
-    "BL": 9492,
-    "TR": 9488,
-    "BR": 9496,
-    "HH": 9472,
-    "VV": 9474,
-    "EE": 32,
-    "PL": 9791
-}
-
 class Dungeon:
     def __init__(self, filename):
         self._load_dungeon(filename)
         self._set_dimensions()
         self._objects = []
 
-    def draw(self, display, window=None):
-        for column in range(0, self._num_columns):
-            for row in range(0, self._num_rows):
-                glyph = GLYPHS[self._map[row][column]]
-                # if(row == 2): glyph = ord("*")
-                # if(column == 13): glyph = ord("*")
-                obj = self._get_object(column, row)
-                character = (chr(glyph) if obj == None else obj.symbol)
-                display.show_text(column, row, character, window=window)
+    # properties
+
+    @property
+    def num_columns(self):
+        return self._num_columns
+
+    @property
+    def num_rows(self):
+        return self._num_rows
+
+    # public methods
+
+    def get_view_window(self, start_row, start_col, end_row, end_col):
+        view_window = []
+        for row in range(start_row, end_row + 1):
+            if(row >= self.num_rows): continue
+
+            view_row = []
+            for col in range(start_col, end_col + 1):
+                if(col >= self.num_columns): continue
+
+                obj = self._get_object(col, row)
+                character = self._map[row][col] if obj == None else obj.symbol
+                view_row.append(character)
+            view_window.append(view_row)
+
+        return view_window
 
     def add_object(self, obj):
         if(self.is_passable(obj.column, obj.row) == False): return False
@@ -36,6 +41,9 @@ class Dungeon:
         if(self._get_object(column, row) != None): return False
         if(self._map[column][row] != "EE"): return False
         return True
+
+    def set_view_window():
+        pass
 
     # private methods
 
