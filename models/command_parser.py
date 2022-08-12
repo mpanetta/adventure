@@ -1,5 +1,7 @@
+from models.logger import Logger
+
 class CommandParser:
-    KEY_G = "g"
+    KEY_H = "h"
     KEY_J = "j"
     KEY_K = "k"
     KEY_L = "l"
@@ -13,13 +15,14 @@ class CommandParser:
     COMMAND_HELP = "Help"
 
     def parse(self, input_string):
-        if(input_string == KEY_G): return COMMAND_LEFT
-        if(input_string == KEY_L): return COMMAND_RIGHT
-        if(input_string == KEY_H): return COMMAND_UP
-        if(input_string == KEY_J): return COMMAND_DOWN
-        if(input_string == KEY_Q): return COMMAND_QUIT
+        Logger.log(f"command buffer: {input_string}")
+        if(input_string == CommandParser.KEY_H): return CommandParser.COMMAND_LEFT
+        if(input_string == CommandParser.KEY_L): return CommandParser.COMMAND_RIGHT
+        if(input_string == CommandParser.KEY_K): return CommandParser.COMMAND_UP
+        if(input_string == CommandParser.KEY_J): return CommandParser.COMMAND_DOWN
+        if(input_string == CommandParser.KEY_Q): return CommandParser.COMMAND_QUIT
 
-        return COMMAND_HELP
+        return None
 
     # private functions
 

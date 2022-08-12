@@ -1,6 +1,7 @@
 from models.display import ENTER_PRESSED
 from models.display import RESIZE
 from models.dungeon_renderer import DungeonRenderer
+from models.logger import Logger
 
 _DUNGEON_WINDOW_HEIGHT = 7
 _DUNGEON_WINDOW_WIDTH = 50
@@ -61,7 +62,8 @@ class Hud:
         elif(character != None):
             self._command_buffer += character
             self._update_command_buffer()
-            self._keyboard_handler(self._command_buffer)
+            if(self._keyboard_handler(self._command_buffer) == True):
+                self._clear_command_buffer()
         else:
             pass
 
