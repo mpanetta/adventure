@@ -1,27 +1,19 @@
 #!python3
 
-from models.command_parser import CommandParser
-from models.monster import MonsterFactory
-from models.dungeon import Dungeon
-from models.player import Player
 from models.hud import Hud
 from models.display import Display
 from models.display import display_decorator
 from models.logger import Logger
+from models.game import Game
 
 import time
 
-def keyboard_handler(key):
-    pass
-
 @display_decorator
 def main(display):
-    player = Player(3, 5, "PL")
-    dungeon = Dungeon("data/dungeons/level1.dng")
-    dungeon.add_object(player)
+    game = Game()
 
-    hud = Hud(display, keyboard_handler)
-    hud.set_dungeon(dungeon)
+    hud = Hud(display, game.input_handler)
+    hud.set_dungeon(game.dungeon)
     hud.start_keyboard()
 
 if(__name__ == "__main__"):
