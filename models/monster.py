@@ -11,6 +11,8 @@ class _MonsterFactory(object):
 
         return klass._instance
 
+    # public methods
+
     def random_monster(self):
         available_monsters = list(self._monsters["monsters"].values())
         return random.choice(available_monsters)
