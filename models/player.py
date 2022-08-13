@@ -7,10 +7,18 @@ class Player:
     @property
     def column(self):
         return self._column
+    
+    @column.setter
+    def column(self, value):
+        self._column = value
 
     @property
     def row(self):
         return self._row
+
+    @row.setter
+    def row(self, value):
+        self._row = value
 
     @property
     def symbol(self):
