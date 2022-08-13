@@ -25,7 +25,7 @@ class Dungeon:
             for col in range(start_col, end_col + 1):
                 if(col >= self.num_columns): continue
 
-                obj = self._get_object(col, row)
+                obj = self._get_object(row, col)
                 character = self._map[row][col] if obj == None else obj.symbol
                 view_row.append(character)
             view_window.append(view_row)
@@ -33,17 +33,14 @@ class Dungeon:
         return view_window
 
     def add_object(self, obj):
-        if(self.is_passable(obj.column, obj.row) == False): return False
+        if(self.is_passable(obj.row, obj.column) == False): return False
         self._objects.append(obj)
         return True
 
-    def is_passable(self, column, row):
+    def is_passable(self, row, column):
         if(self._get_object(column, row) != None): return False
-        if(self._map[column][row] != "EE"): return False
+        if(self._map[row][column] != "EE"): return False
         return True
-
-    def set_view_window():
-        pass
 
     # private methods
 
@@ -62,7 +59,7 @@ class Dungeon:
         self._num_rows = len(self._map)
         self._num_columns = len(self._map[0])
 
-    def _get_object(self, column, row):
+    def _get_object(self, row, column):
        for obj in self._objects:
-           if(obj.column == column and obj.row == row):
+           if(obj.row == row and obj.column == column):
                return obj

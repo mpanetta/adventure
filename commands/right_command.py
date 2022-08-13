@@ -1,3 +1,10 @@
+from models.logger import Logger
+
 class RightCommand:
     def execute(self, game):
-        pass
+        row = game.player.row
+        col = game.player.column + 1
+
+        Logger.log(f"player: ({game.player.row}, {game.player.column})")        
+        if(game.dungeon.is_passable(row, col)):
+            game.player.column += 1
