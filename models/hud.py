@@ -16,7 +16,7 @@ class Hud:
         self._display = display
         self._keyboard_handler = keyboard_handler
         self._command_buffer = ""
-        self._last_key = 1
+        self._last_key = None
         self._dungeon = None
         
         self._create_background_window()
@@ -35,15 +35,11 @@ class Hud:
 
     def set_dungeon(self, dungeon):
         self._dungeon = dungeon
-        self._dungeon_renderer.set_dungeon(dungeon)
         self._dungeon_renderer.set_view_size(_DUNGEON_WINDOW_HEIGHT, _DUNGEON_WINDOW_WIDTH)
-        self._dungeon_renderer.pan_to(0, 0)
+        self._dungeon_renderer.set_dungeon(dungeon)
         self._update_dungeon()
         self._display.refresh()
         self._update_cursor()
-
-    def scroll_dungeon(self, col, row):
-        pass
 
     def wait(self):
         self._display.input()
@@ -104,6 +100,7 @@ class Hud:
 
     def _update_dungeon(self):
         if(self._dungeon == None): return
+
         self._dungeon_renderer.draw()
 
     def _update_cursor(self):

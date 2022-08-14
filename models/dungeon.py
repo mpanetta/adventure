@@ -14,6 +14,14 @@ class Dungeon:
     def num_rows(self):
         return self._num_rows
 
+    @property
+    def camera_row(self):
+        return self._camera_object.row
+
+    @property
+    def camera_column(self):
+        return self._camera_object.column
+
     # public methods
 
     def get_view_window(self, start_row, start_col, end_row, end_col):
@@ -41,6 +49,9 @@ class Dungeon:
         if(self._get_object(column, row) != None): return False
         if(self._map[row][column] != "EE"): return False
         return True
+
+    def set_camera_object(self, obj):
+        self._camera_object = obj
 
     # private methods
 
