@@ -1,3 +1,7 @@
+from models.logger import Logger
+
+import math
+
 # Dungeon unicode characters
 
 GLYPHS = {
@@ -20,7 +24,7 @@ class DungeonRenderer:
 
     @property
     def start_row(self):
-        return self._row
+        return self._row - 1
 
     @property
     def start_column(self):
@@ -34,7 +38,7 @@ class DungeonRenderer:
     def end_column(self):
         return self.start_column + self._width 
     
-    # public interface
+    # public methods
 
     def set_dungeon(self, dungeon):
         self._dungeon = dungeon
@@ -43,14 +47,17 @@ class DungeonRenderer:
         self._height = height
         self._width = width
 
-    def pan_to(self, row, col):
-        self._row = max(min(row, self._dungeon.num_rows - (self._height - 1)), 0)
-        self._col = max(min(col, self._dungeon.num_columns - (self._width - 1)), 0)
-
     def draw(self):
+        self._pan_to(self._dungeon.camera_row, self._dungeon.camera_column)
         view_window = self._dungeon.get_view_window(self.start_row, self.start_column, self.end_row, self.end_column)
-        self._display.debug_message(f"{len(view_window)}, {len(view_window[0])} -- {self._dungeon.num_rows}, {self._dungeon.num_columns}")
+
         for row in range(0, len(view_window)):
             for col in range(0, len(view_window[0])):
                 symbol = chr(GLYPHS[view_window[row][col]])
                 self._display.show_text(col, row, symbol, window = self._window)
+
+    # private methods
+
+    def _pan_to(self, row, col):
+        self._row = max(min(row, self._dungeon.num_rows - (self._height - 1)), 0)
+        self._col = max(min(col, self._dungeon.num_columns - (self._width - 1)), 0)

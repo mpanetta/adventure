@@ -37,6 +37,7 @@ class Game:
     def _create_player(self):
         self._player = Player(3, 5, "PL")
         self._dungeon.add_object(self._player)
+        self._dungeon.set_camera_object(self._player)
 
     def _create_command_parser(self):
         self._command_parser = CommandParser()
