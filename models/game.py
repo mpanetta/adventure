@@ -18,7 +18,7 @@ class Game:
     @property
     def player(self):
         return self._player
-    
+
     # public methods
 
     def input_handler(self, text):
@@ -28,7 +28,7 @@ class Game:
         command = CommandFactory.create_command(command_class)
         command.execute(self)
         return True
- 
+
     # private methods
 
     def _create_initial_dungeon(self):

@@ -3,7 +3,7 @@ from models.display import RESIZE
 from models.dungeon_renderer import DungeonRenderer
 from models.logger import Logger
 
-_DUNGEON_WINDOW_HEIGHT = 7
+_DUNGEON_WINDOW_HEIGHT = 14
 _DUNGEON_WINDOW_WIDTH = 50
 _DUNGEON_WINDOW_ROW = 3
 _DUNGEON_WINDOW_COL = 3
@@ -18,7 +18,7 @@ class Hud:
         self._command_buffer = ""
         self._last_key = None
         self._dungeon = None
-        
+
         self._create_background_window()
         self._create_dungeon_pad()
         self._create_header()
@@ -93,7 +93,7 @@ class Hud:
 
     def _header_message(self):
         return f"screen: {self._display.rows}, {self._display.columns} last key: {self._last_key}"
-    
+
     def _update_header(self):
         self._header_window.clear()
         self._display.show_text(0, 0, self._header_message(), self._header_window)
