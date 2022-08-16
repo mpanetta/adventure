@@ -19,7 +19,7 @@ class DungeonRenderer:
     def __init__(self, display, window=None, width=10, height=10):
         self._display = display
         self._window = window
-    
+
     # properties
 
     @property
@@ -29,15 +29,15 @@ class DungeonRenderer:
     @property
     def start_column(self):
         return self._col
-    
+
     @property
     def end_row(self):
         return self.start_row + self._height
 
     @property
     def end_column(self):
-        return self.start_column + self._width 
-    
+        return self.start_column + self._width
+
     # public methods
 
     def set_dungeon(self, dungeon):
