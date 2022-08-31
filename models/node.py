@@ -17,6 +17,7 @@ class Node:
        self._rectangle = Rect(top_left, height, width)
        self._left = None
        self._right = None
+       self._room = None
 
     def __str__(self):
         return f"{self._rectangle}"
@@ -76,6 +77,14 @@ class Node:
     @property
     def rectangle(self):
         return self._rectangle
+
+    @property
+    def room(self):
+        return self._room
+
+    @room.setter
+    def room(self, value):
+        self._room = value
 
     # public methods
 

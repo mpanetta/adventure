@@ -16,4 +16,3 @@ parser.add_argument("-f", "--filename", help="name of file to save for map")
 parsed_args = parser.parse_args()
 
 generator = DungeonGenerator(parsed_args.rows, parsed_args.columns)
-generator.draw()
