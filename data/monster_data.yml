@@ -1,6 +1,6 @@
 monsters:
   orc:
-    name: Orc
+    name:Orc
     hit_points: 15
     attack_power: 8
     defense_power: 2
