@@ -14,7 +14,7 @@ class _CommandFactory(object):
     def __new__(klass):
         if(klass._instance == None):
             klass._instance = super(_CommandFactory, klass).__new__(klass)
-            
+
             return klass._instance
 
     # public methods

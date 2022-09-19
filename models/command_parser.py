@@ -6,7 +6,7 @@ class CommandParser:
     KEY_K = "k"
     KEY_L = "l"
     KEY_Q = "q"
-    
+
     COMMAND_LEFT = "left"
     COMMAND_RIGHT = "right"
     COMMAND_UP = "up"

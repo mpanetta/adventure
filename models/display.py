@@ -60,7 +60,7 @@ class _Display(object):
         self._stdscr.clear()
 
     def create_window(self, row, col, height, width, **kwargs):
-        new_window = curses.newwin(height, width, row, col)    
+        new_window = curses.newwin(height, width, row, col)
         new_window.leaveok(True)
 
         self._windows.append(new_window)
